@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<!-- saved from url=(0098)file:///private/var/folders/rg/ww645c7j117gz__791_gfjfw0000gn/T/mume2020529-63839-p2pwtz.c9m4.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>chatbot-howto</title>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="./chatbot-howto-htmlversion_files/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="react-simple-chatbot-how-to-guide">React Simple Chatbot How-to Guide</h1>
+
+<p>If you are a React developer and what to add some sparks to your web site, why not add a chatbot to interact with your users?</p>
+<p>This how-to guide will show you how to create your first react chatbot.</p>
+<h2 class="mume-header" id="what-you-will-be-creating">What you will be creating</h2>
+
+<p>In this tutorial, we will use React Simple Chabot to build a simple donut order chatbot.</p>
+<p>The final chatbot will look like this:<br>
+<img src="./chatbot-howto-htmlversion_files/donutchatbot-demo.gif" alt="Chatbot demo"></p>
+<p><strong>In this how-to guide:</strong></p>
+<ul>
+<li><a href="file:///private/var/folders/rg/ww645c7j117gz__791_gfjfw0000gn/T/mume2020529-63839-p2pwtz.c9m4.html#section1">Section 1: Create a new react app</a></li>
+<li><a href="file:///private/var/folders/rg/ww645c7j117gz__791_gfjfw0000gn/T/mume2020529-63839-p2pwtz.c9m4.html#section2">Section 2: Installation</a></li>
+<li><a href="file:///private/var/folders/rg/ww645c7j117gz__791_gfjfw0000gn/T/mume2020529-63839-p2pwtz.c9m4.html#section3">Section 3: Create a simple chatbot - "Hello World</a></li>
+<li><a href="file:///private/var/folders/rg/ww645c7j117gz__791_gfjfw0000gn/T/mume2020529-63839-p2pwtz.c9m4.html#section4">Section 4: Design the flow</a></li>
+<li><a href="file:///private/var/folders/rg/ww645c7j117gz__791_gfjfw0000gn/T/mume2020529-63839-p2pwtz.c9m4.html#section5">Section 5: Steps</a></li>
+<li><a href="file:///private/var/folders/rg/ww645c7j117gz__791_gfjfw0000gn/T/mume2020529-63839-p2pwtz.c9m4.html#section6">Section 6: Adding Order component</a></li>
+</ul>
+<hr>
+<h3 class="mume-header" id="a-namesection1a-section-1-create-a-new-react-app"><a name="section1" href="file:///Users/leona/Desktop/chatbot-react-writeup"></a> Section 1: Create a new react app</h3>
+
+<p>Let's create a new react project using <code>create-react-app</code>, in your terminal run:</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># Create a new react app</span>
+npx create-react-app donut-chatbot
+
+<span class="token comment"># Change directory to donut-chatbot</span>
+<span class="token function">cd</span> donut-chatbot
+
+<span class="token comment"># Start the project</span>
+<span class="token function">npm</span> start
+</pre><p>Once you have run <code>npm start</code>, you should see the default React page.</p>
+<p><img src="./chatbot-howto-htmlversion_files/react-app.png" alt="React App"></p>
+<p>There is an <code>App.js</code> file inside the <code>src</code> folder. This file contains everything that runs this default react page. Update the content of this file to include a title of our chatbot app.</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'./App.css'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div className<span class="token operator">=</span><span class="token string">"App"</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>Donut Chatbot<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> App<span class="token punctuation">;</span>
+</pre><p><img src="./chatbot-howto-htmlversion_files/react-step1.png" alt="React Header"></p>
+<hr>
+<h3 class="mume-header" id="a-namesection2asection-2-installation"><a name="section2" href="file:///Users/leona/Desktop/chatbot-react-writeup"></a>Section 2: Installation</h3>
+
+<p>Two packages are required for this project, <code>react-simple-chatbot</code> and <code>styled-component</code>, as the styling used for the chatbot are imported from <code>styled-component</code>.</p>
+<p>To install all dependencies needed to create a simple chatbot, run the following command in your terminal:</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> react-simple-chatbot styled-components --save
+</pre><p>You can check if these are installed by looking through the <code>dependencies</code> list in <code>package.json</code>.</p>
+<hr>
+<h3 class="mume-header" id="a-namesection3asection-3-create-a-simple-chatbot-hello-world"><a name="section3" href="file:///Users/leona/Desktop/chatbot-react-writeup"></a>Section 3: Create a simple chatbot - "Hello World"</h3>
+
+<p>In the <code>src</code> folder, create a new folder called <code>components</code>. All React components we are going to create will be stored here. In this folder, create two files titled <code>Donutchatbot.js</code> and <code>Order.js</code>.</p>
+<p><code>Donutchatbot.js</code> will handle the chatbot, <code>Order.js</code> will handle the order preview.</p>
+<p>In <code>Donutchatbot.js</code>, create a class component as below:</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Donutchatbot</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token punctuation">{</span>
+
+  <span class="token comment">/* state to be added here */</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+            <span class="token punctuation">{</span><span class="token comment">/* code to be added here */</span><span class="token punctuation">}</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> Donutchatbot<span class="token punctuation">;</span>
+</pre><p><strong>Import required modules</strong></p>
+<p>We need to import <code>ChatBot</code> and <code>ThemeProvider</code> to get the structure needed for this chatbot, add these to <code>Donutchatbot.js</code>.</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">import</span> ChatBot <span class="token keyword">from</span> <span class="token string">'react-simple-chatbot'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ThemeProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'styled-components'</span><span class="token punctuation">;</span>
+</pre><p><strong>Adding state</strong></p>
+<p>Two pieces of information required to run the chatbot, we specify these in the state. Create a state as below:</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript">state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    theme <span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        background<span class="token punctuation">:</span> <span class="token string">'#f5f8fb'</span><span class="token punctuation">,</span>
+        fontFamily<span class="token punctuation">:</span> <span class="token string">'Courier'</span><span class="token punctuation">,</span>
+        headerBgColor<span class="token punctuation">:</span> <span class="token string">'#007FFF'</span><span class="token punctuation">,</span>
+        headerFontColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+        headerFontSize<span class="token punctuation">:</span> <span class="token string">'15px'</span><span class="token punctuation">,</span>
+        botBubbleColor<span class="token punctuation">:</span> <span class="token string">'#007FFF'</span><span class="token punctuation">,</span>
+        botFontColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+        userBubbleColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+        userFontColor<span class="token punctuation">:</span> <span class="token string">'#4a4a4a'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      steps <span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          id<span class="token punctuation">:</span> <span class="token string">'1'</span><span class="token punctuation">,</span>
+          message<span class="token punctuation">:</span> <span class="token string">'Hello World'</span><span class="token punctuation">,</span>
+          end<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</pre><p><code>theme</code> sets out the styling for the chatbot such as the colours and font, you can amend these as you wish.</p>
+<p><code>steps</code> sets out the flow of the chatbot conversation, you must have an <code>id</code> as an identifier for each step.</p>
+<p><code>id</code>, <code>message</code>, <code>end</code> are keywords which cannot be changed, we will explore other keywords later in this tutorial.</p>
+<p>At this stage, we have a message <code>Hello World</code>, and then <code>end</code> the chatbot.</p>
+<p><strong>Adding components</strong></p>
+<p>Now add <code>ThemeProvider</code> and <code>ChatBot</code> components in our <code>return</code>:</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">return</span><span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>ThemeProvider theme <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>theme<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>ChatBot steps <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>steps<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>ThemeProvider<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span>
+</pre><p>This will take the <code>theme</code> we set in the <code>state</code> for the styling and <code>steps</code> for the flow of the chatbot.</p>
+<p>This is how the <code>Donutchatbot.js</code> should look like:</p>
+<details><summary>expend to see the code</summary>
+<p>
+</p><pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> ChatBot <span class="token keyword">from</span> <span class="token string">'react-simple-chatbot'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ThemeProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'styled-components'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Donutchatbot</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token punctuation">{</span>
+
+  state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    theme <span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      background<span class="token punctuation">:</span> <span class="token string">'#f5f8fb'</span><span class="token punctuation">,</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'Courier'</span><span class="token punctuation">,</span>
+      headerBgColor<span class="token punctuation">:</span> <span class="token string">'#007FFF'</span><span class="token punctuation">,</span>
+      headerFontColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+      headerFontSize<span class="token punctuation">:</span> <span class="token string">'15px'</span><span class="token punctuation">,</span>
+      botBubbleColor<span class="token punctuation">:</span> <span class="token string">'#007FFF'</span><span class="token punctuation">,</span>
+      botFontColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+      userBubbleColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+      userFontColor<span class="token punctuation">:</span> <span class="token string">'#4a4a4a'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    steps <span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'1'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'Hello World'</span><span class="token punctuation">,</span>
+        end<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>ThemeProvider theme <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>theme<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>ChatBot steps <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>steps<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>ThemeProvider<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> Donutchatbot<span class="token punctuation">;</span>
+</pre><p></p>
+</details>
+<br>
+<p><strong>Import to App.js</strong></p>
+<p>In App.js, add the following:</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">import</span> Donutchatbot <span class="token keyword">from</span> <span class="token string">'./components/Donutchatbot'</span><span class="token punctuation">;</span>
+</pre><p>This will import the <code>Donutchatbot.js</code> module from <code>src/components</code> as <code>Donutchatbot</code>.</p>
+<p>Call this component by adding <code>&lt;Donutchatbot /&gt;</code> underneath the title.</p>
+<p>This is what <code>App.js</code> should look like:</p>
+<details><summary>expend to see the code</summary>
+<p>
+</p><pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'./App.css'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Donutchatbot <span class="token keyword">from</span> <span class="token string">'./components/Donutchatbot'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div className<span class="token operator">=</span><span class="token string">"App"</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>Donut Chatbot<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>Donutchatbot <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> App<span class="token punctuation">;</span>
+</pre><p></p>
+</details>
+<br>
+<p><strong>Styling</strong></p>
+<p>Let's add some styling by updating the default <code>App.css</code> file.</p>
+<pre data-role="codeBlock" data-info="css" class="language-css"><span class="token selector"><span class="token class">.App</span></span> <span class="token punctuation">{</span>
+  <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">100</span><span class="token unit">vw</span><span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">100</span><span class="token unit">vh</span><span class="token punctuation">;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">flex-direction</span><span class="token punctuation">:</span> column<span class="token punctuation">;</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><p><strong>Hello world chatbot</strong><br>
+You have now created a simple chatbot!<br>
+<img src="./chatbot-howto-htmlversion_files/helloworld.png" alt="Hello world"></p>
+<hr>
+<h3 class="mume-header" id="a-namesection4asection-4-design-the-flow"><a name="section4" href="file:///Users/leona/Desktop/chatbot-react-writeup"></a>Section 4: Design the flow</h3>
+
+<p>Imagine the conversation with the chatbot you are about to create. This is a simplified version of the flow:</p>
+<p><img src="./chatbot-howto-htmlversion_files/flow-diagram.png" alt="Flow Diagram"></p>
+<p>Once the flow is designed, we can start thinking about the steps following this flow.</p>
+<hr>
+<h3 class="mume-header" id="a-namesection5asection-5-steps"><a name="section5" href="file:///Users/leona/Desktop/chatbot-react-writeup"></a>Section 5: Steps</h3>
+
+<p>We must have an <code>id</code> for each step, and to identify whether we expect the user to provide some values (e.g. name), check if the user is giving you valid value, or simply provide a list of options for the user to choose from.</p>
+<p>Each step will need a <code>trigger</code> to identify the next step, this refers to the step <code>id</code>.</p>
+<p>These <code>steps</code> are added to the <code>state</code>:</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript">state <span class="token operator">=</span> <span class="token punctuation">{</span>
+  theme <span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token comment">/*theme code here*/</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  steps <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token comment">/*steps code to be added here*/</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</pre><p><strong>Welcome, ask for name</strong></p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript">steps<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'1'</span><span class="token punctuation">,</span>
+    message<span class="token punctuation">:</span> <span class="token string">'What is your name?'</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'name'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'name'</span><span class="token punctuation">,</span>
+    user<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'3'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> 
+  <span class="token operator">...</span>
+<span class="token punctuation">]</span>
+
+</pre><p>This will print a message <code>What is your name?</code>, once the message is shown, it will trigger the step <code>id</code> called <code>name</code>.</p>
+<p>In the step with id <code>name</code>, we expect the user to provide an input value <code>name</code>. This can only be done by setting <code>user</code> to <code>true</code> to allow user input. Once a name is provided, it will be stored, and then trigger the next step, with an id <code>3</code>.</p>
+<p><strong>Give a selection of donuts to choose from</strong></p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript">steps<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token operator">...</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'3'</span><span class="token punctuation">,</span>
+    message<span class="token punctuation">:</span> <span class="token string">'Hi {previousValue}! Which donut would you like?'</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span>
+    options<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'original'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Original'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'chocolate'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Chocolate'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'jam'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Jam'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'special'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Special'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">]</span>
+</pre><p>This will take the user's name as <code>{previousValue}</code>, display this as part of the message.</p>
+<p>We want to be in control of the available selection of donuts. <code>options</code> are used here for the user to choose from. The <code>trigger</code> for all options are the same in this case, as this will continue with our flow.</p>
+<p><strong>Ask how many to order</strong></p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript">steps<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token operator">...</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'5'</span><span class="token punctuation">,</span>
+    message<span class="token punctuation">:</span> <span class="token string">'How many would you like?'</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span>
+    user<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">validator</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isNaN</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token string">'Please give me a number'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token string">'Minimum order is 1'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">&gt;</span> <span class="token number">60</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>value<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">? Maximum order is 60!`</span></span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">]</span>
+</pre><p>Once a message is displayed <code>How many would you like?</code>, we expect the user to provide a number. <code>validator</code> is used here for this purpose.</p>
+<p>A few conditions are set here to ensure that:</p>
+<ul>
+<li>this is a number</li>
+<li>minimum value of 1</li>
+<li>maximum value of 60</li>
+</ul>
+<p>Note that it will not trigger step id <code>7</code> until a valid number is provided.</p>
+<p><strong>Show order</strong></p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript">steps<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token operator">...</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+    message<span class="token punctuation">:</span> <span class="token string">'Great! This is your order'</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'order'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'order'</span><span class="token punctuation">,</span>
+    component<span class="token punctuation">:</span> <span class="token operator">&lt;</span>Order<span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    asMessage<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'update'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">]</span>
+</pre><p>Once all questions are answered, the values will be stored and show the <code>Order</code> component, we will set up this component later (in section 6).</p>
+<p><strong>Check order</strong></p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript">steps<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token operator">...</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'update'</span><span class="token punctuation">,</span>
+    message<span class="token punctuation">:</span> <span class="token string">'Would you like to update your order?'</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'update-question'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'update-question'</span><span class="token punctuation">,</span>
+    options<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'yes'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Change order'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'update-yes'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'no'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Place my order!'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'end-message'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">]</span>
+</pre><p>This allows the user to update their order if they wish, depending on the <code>options</code> chosen, will have a different <code>trigger</code>.</p>
+<p><strong>Update order</strong></p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript">steps<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token operator">...</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'update-yes'</span><span class="token punctuation">,</span>
+    message<span class="token punctuation">:</span> <span class="token string">'What would you like to update?'</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'update-fields'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'update-fields'</span><span class="token punctuation">,</span>
+    options<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Donut Selection'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'update-selection'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Quantity'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'update-quantity'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'update-selection'</span><span class="token punctuation">,</span>
+    update<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'update-quantity'</span><span class="token punctuation">,</span>
+    update<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">]</span>
+</pre><p>Give further <code>options</code> of which one to update, once selected, it will <code>trigger</code> to the chosen option: <code>update-selection</code> or <code>update-quantity</code>.</p>
+<p>The key <code>update</code> will update that value stored, once updated, it will go back to trigger <code>7</code>, which we have set above to ask the user to check their order again.</p>
+<p><strong>Complete order</strong></p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript">steps<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token operator">...</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'end-message'</span><span class="token punctuation">,</span>
+    message<span class="token punctuation">:</span> <span class="token string">'Thanks! Your order is on its way!'</span><span class="token punctuation">,</span>
+    end<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</pre><p>This is the final step, with a message and set the <code>end</code> to be <code>true</code> so the chatbot will no longer be active.</p>
+<p>Looking back to our flow diagram to make sure that we have covered every steps:</p>
+<p><img src="./chatbot-howto-htmlversion_files/flow-diagram-id.png" alt="Flow Diagram"></p>
+<p>This is how the <code>Donutchatbot.js</code> should look like:</p>
+<details><summary>expend to see the code</summary>
+<p>
+</p><pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> ChatBot <span class="token keyword">from</span> <span class="token string">'react-simple-chatbot'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ThemeProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'styled-components'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Donutchatbot</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token punctuation">{</span>
+
+  state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    theme <span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      background<span class="token punctuation">:</span> <span class="token string">'#f5f8fb'</span><span class="token punctuation">,</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'Courier'</span><span class="token punctuation">,</span>
+      headerBgColor<span class="token punctuation">:</span> <span class="token string">'#007FFF'</span><span class="token punctuation">,</span>
+      headerFontColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+      headerFontSize<span class="token punctuation">:</span> <span class="token string">'15px'</span><span class="token punctuation">,</span>
+      botBubbleColor<span class="token punctuation">:</span> <span class="token string">'#007FFF'</span><span class="token punctuation">,</span>
+      botFontColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+      userBubbleColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+      userFontColor<span class="token punctuation">:</span> <span class="token string">'#4a4a4a'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    steps <span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'1'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'What is your name?'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'name'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'name'</span><span class="token punctuation">,</span>
+        user<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'3'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'3'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'Hi {previousValue}! Which donut would you like?'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'original'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Original'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'chocolate'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Chocolate'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'jam'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Jam'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'special'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Special'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'5'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'How many would you like?'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span>
+        user<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">validator</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isNaN</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">return</span> <span class="token string">'Please give me a number'</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">return</span> <span class="token string">'Minimum order is 1'</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">&gt;</span> <span class="token number">60</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>value<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">? Maximum order is 60!`</span></span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+          <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'Great! This is your order'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'order'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'order'</span><span class="token punctuation">,</span>
+        component<span class="token punctuation">:</span> <span class="token operator">&lt;</span>Order<span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+        asMessage<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'update'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'Would you like to update your order?'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'update-question'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update-question'</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'yes'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Change order'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'update-yes'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'no'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Place my order!'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'end-message'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update-yes'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'What would you like to update?'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'update-fields'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update-fields'</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Donut Selection'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'update-selection'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Quantity'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'update-quantity'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update-selection'</span><span class="token punctuation">,</span>
+        update<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update-quantity'</span><span class="token punctuation">,</span>
+        update<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'end-message'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'Thanks! Your order is on its way!'</span><span class="token punctuation">,</span>
+        end<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span> 
+<span class="token punctuation">}</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>ThemeProvider theme <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>theme<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>ChatBot steps <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>steps<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>ThemeProvider<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> Donutchatbot<span class="token punctuation">;</span>
+
+</pre><p></p>
+</details>
+<br>
+<p>This app is not yet working until <code>Order</code> component is added.</p>
+<hr>
+<h3 class="mume-header" id="a-namesection6asection-6-adding-order-component"><a name="section6" href="file:///Users/leona/Desktop/chatbot-react-writeup"></a>Section 6: Adding Order component</h3>
+
+<p>Previously, we added <code>&lt;Order /&gt;</code> component in step <code>order</code>, this component doesn't exist, so we need to create it.</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript">steps<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token operator">...</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+    message<span class="token punctuation">:</span> <span class="token string">'Great! This is your order'</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'order'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    id<span class="token punctuation">:</span> <span class="token string">'order'</span><span class="token punctuation">,</span>
+    component<span class="token punctuation">:</span> <span class="token operator">&lt;</span>Order<span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+    asMessage<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    trigger<span class="token punctuation">:</span> <span class="token string">'update'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">]</span>
+</pre><p>There are three steps:</p>
+<ul>
+<li>store the values,</li>
+<li>display the order,</li>
+<li>import <code>Order.js</code> to <code>Donutchatbot.js</code>.</li>
+</ul>
+<p><strong>Order Component</strong></p>
+<p>Earlier, you have created an <code>Order.js</code> file inside the <code>components</code> directory. This needs to be a class component as we will be storing a <code>state</code>.</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Order</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token punctuation">{</span>
+
+  <span class="token comment">/* state and lifecycle to be added here */</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div style <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">{</span> width<span class="token punctuation">:</span> <span class="token string">'100%'</span> <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>
+        <span class="token punctuation">{</span><span class="token comment">/* code to be added here */</span><span class="token punctuation">}</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> Order<span class="token punctuation">;</span>
+</pre><p><strong>Setting state</strong></p>
+<p>The values we need for the order are <code>name</code>, <code>selection</code> and <code>quantity</code>, set these as <code>state</code>:</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript">state <span class="token operator">=</span> <span class="token punctuation">{</span>
+        name<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+        selection<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+        quantity<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</pre><p><strong>Lifecycle: Component Did Mount</strong></p>
+<p>Lifecycle is used here in <code>Order.js</code> before <code>render()</code> to mount the <code>steps</code> and the values <code>name</code>, <code>selection</code> and <code>quantity</code> when this component is rendered. We also use <code>setState()</code> method to add/update the values in due course.</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token function">componentDidMount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> steps <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> name<span class="token punctuation">,</span> selection<span class="token punctuation">,</span> quantity <span class="token punctuation">}</span> <span class="token operator">=</span> steps<span class="token punctuation">;</span>
+
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">,</span> selection<span class="token punctuation">,</span> quantity <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><p><code>this.props</code> refers to the steps defined in <code>DonutChatbot.js</code>. When <code>Order.js</code> is rendered, this will <code>setState</code> to add the values of <code>name</code>, <code>selection</code> and <code>quantity</code> to the <code>state</code>.</p>
+<p>If you want to know more about lifecycle, you can read more <a href="https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class">here</a>.</p>
+<p><strong>Rendering</strong></p>
+<p>To display all information in a table as below:</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> name<span class="token punctuation">,</span> selection<span class="token punctuation">,</span> quantity <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> width<span class="token punctuation">:</span> <span class="token string">'100%'</span> <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>h3<span class="token operator">&gt;</span>Your order<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>table<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>tbody<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>tr<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span>Name<span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span><span class="token punctuation">{</span>name<span class="token punctuation">.</span>value<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>tr<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span>Selection<span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span><span class="token punctuation">{</span>selection<span class="token punctuation">.</span>value<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>tr<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span>Quantity<span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span><span class="token punctuation">{</span>quantity<span class="token punctuation">.</span>value<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>tbody<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>table<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><p>We set <code>name</code>, <code>selection</code> and <code>quantity</code> from <code>this.state</code>, and then display these in the table by referring to <code>name.value</code>, <code>selection.value</code> and <code>quantity.value</code> respectively.</p>
+<p><code>Order.js</code> should now look like this:</p>
+<details><summary>expend to see the code</summary>
+<p>
+</p><pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Order</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token punctuation">{</span>
+
+  state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+    selection<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+    quantity<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">componentDidMount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> steps <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> name<span class="token punctuation">,</span> selection<span class="token punctuation">,</span> quantity <span class="token punctuation">}</span> <span class="token operator">=</span> steps<span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token punctuation">,</span> selection<span class="token punctuation">,</span> quantity <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">const</span> <span class="token punctuation">{</span> name<span class="token punctuation">,</span> selection<span class="token punctuation">,</span> quantity <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div style <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">{</span> width<span class="token punctuation">:</span> <span class="token string">'100%'</span> <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>h3<span class="token operator">&gt;</span>Your order<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>table<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>tbody<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>tr<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span>Name<span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span><span class="token punctuation">{</span>name<span class="token punctuation">.</span>value<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>tr<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span>Selection<span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span><span class="token punctuation">{</span>selection<span class="token punctuation">.</span>value<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>tr<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span>Quantity<span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>td<span class="token operator">&gt;</span><span class="token punctuation">{</span>quantity<span class="token punctuation">.</span>value<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>tbody<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>table<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> Order<span class="token punctuation">;</span>
+</pre><p></p>
+</details>
+<br>
+<p><strong>Import Order Component</strong></p>
+<p><code>Order.js</code> is all set, this must now to be imported to <code>Donutchatbot.js</code>:</p>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">import</span> Order <span class="token keyword">from</span> <span class="token string">'./Order'</span><span class="token punctuation">;</span>
+</pre><p><code>Donutchatbot.js</code> should now look like this:</p>
+<details><summary>expend to see the code</summary>
+<p>
+</p><pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> ChatBot <span class="token keyword">from</span> <span class="token string">'react-simple-chatbot'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ThemeProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'styled-components'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Order <span class="token keyword">from</span> <span class="token string">'./Order'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Donutchatbot</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token punctuation">{</span>
+
+  state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    theme <span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      background<span class="token punctuation">:</span> <span class="token string">'#f5f8fb'</span><span class="token punctuation">,</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'Courier'</span><span class="token punctuation">,</span>
+      headerBgColor<span class="token punctuation">:</span> <span class="token string">'#007FFF'</span><span class="token punctuation">,</span>
+      headerFontColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+      headerFontSize<span class="token punctuation">:</span> <span class="token string">'15px'</span><span class="token punctuation">,</span>
+      botBubbleColor<span class="token punctuation">:</span> <span class="token string">'#007FFF'</span><span class="token punctuation">,</span>
+      botFontColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+      userBubbleColor<span class="token punctuation">:</span> <span class="token string">'#fff'</span><span class="token punctuation">,</span>
+      userFontColor<span class="token punctuation">:</span> <span class="token string">'#4a4a4a'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    steps <span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'1'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'What is your name?'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'name'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'name'</span><span class="token punctuation">,</span>
+        user<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'3'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'3'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'Hi {previousValue}! Which donut would you like?'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'original'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Original'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'chocolate'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Chocolate'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'jam'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Jam'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'special'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Special'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'5'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'5'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'How many would you like?'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span>
+        user<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">validator</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isNaN</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">return</span> <span class="token string">'Please give me a number'</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">return</span> <span class="token string">'Minimum order is 1'</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">&gt;</span> <span class="token number">60</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>value<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">? Maximum order is 60!`</span></span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+          <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'Great! This is your order'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'order'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'order'</span><span class="token punctuation">,</span>
+        component<span class="token punctuation">:</span> <span class="token operator">&lt;</span>Order<span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+        asMessage<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'update'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'Would you like to update your order?'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'update-question'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update-question'</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'yes'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Change order'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'update-yes'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'no'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Place my order!'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'end-message'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update-yes'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'What would you like to update?'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'update-fields'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update-fields'</span><span class="token punctuation">,</span>
+        options<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Donut Selection'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'update-selection'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> value<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span> label<span class="token punctuation">:</span> <span class="token string">'Quantity'</span><span class="token punctuation">,</span> trigger<span class="token punctuation">:</span> <span class="token string">'update-quantity'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update-selection'</span><span class="token punctuation">,</span>
+        update<span class="token punctuation">:</span> <span class="token string">'selection'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'update-quantity'</span><span class="token punctuation">,</span>
+        update<span class="token punctuation">:</span> <span class="token string">'quantity'</span><span class="token punctuation">,</span>
+        trigger<span class="token punctuation">:</span> <span class="token string">'7'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        id<span class="token punctuation">:</span> <span class="token string">'end-message'</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> <span class="token string">'Thanks! Your order is on its way!'</span><span class="token punctuation">,</span>
+        end<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span> 
+<span class="token punctuation">}</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>ThemeProvider theme <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>theme<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>ChatBot steps <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>steps<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>ThemeProvider<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> Donutchatbot<span class="token punctuation">;</span>
+
+</pre><p></p>
+</details>
+<br>
+<hr>
+<h3 class="mume-header" id="final-app">Final app</h3>
+
+<p>All done. This is the complete app.</p>
+<p><img src="./chatbot-howto-htmlversion_files/donutchatbot-demo.gif" alt="Chatbot demo"></p>
+<h3 class="mume-header" id="whats-next">What's next?</h3>
+
+<p>There are more you can do with this chatbot, for example:</p>
+<ul>
+<li>Store the steps in a JSON and fetch this via an API call</li>
+<li>Add Speech Recognition to support user accessibility.</li>
+<li>Connect to the server and database so you can actually place an order.</li>
+<li>and many more.</li>
+</ul>
+<hr>
+<p><strong>Checkout their documentation:</strong> <a href="https://lucasbassetti.com.br/react-simple-chatbot/#/">Chatbot documentation</a></p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  </body></html>
